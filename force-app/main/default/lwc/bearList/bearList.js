@@ -1,3 +1,4 @@
+import { loadStyle } from 'lightning/platformResourceLoader';
 import { LightningElement, track, wire } from 'lwc';
 import ursusResources from '@salesforce/resourceUrl/ursus_park';
 /** BearController.searchBears(searchTerm) Apex method */
@@ -6,9 +7,9 @@ export default class BearList extends LightningElement {
 	@track searchTerm = '';
 	@wire(searchBears, {searchTerm: '$searchTerm'})
 	bears;
-	appResources = {
-		bearSilhouette: ursusResources +'/img/standing-bear-silhouette.png',
-	};
+	connectedCallback() {
+		loadStyle(this, ursusResources + '/style.css');
+	}
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as
 		// long as this function is being called within a delay of 300 ms.
