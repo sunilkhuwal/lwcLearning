@@ -1,4 +1,5 @@
-import { NavigationMixin } from 'lightning/navigation';
+import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
+import { fireEvent } from 'c/pubsub';
 import { loadStyle } from 'lightning/platformResourceLoader';
 import { LightningElement, track, wire } from 'lwc';
 import ursusResources from '@salesforce/resourceUrl/ursus_park';
@@ -6,8 +7,16 @@ import ursusResources from '@salesforce/resourceUrl/ursus_park';
 import searchBears from '@salesforce/apex/BearController.searchBears';
 export default class BearListNav extends NavigationMixin(LightningElement) {
 	@track searchTerm = '';
+	@track bears;
+	@wire(CurrentPageReference) pageRef;
 	@wire(searchBears, {searchTerm: '$searchTerm'})
-	bears;
+	loadBears(result) {
+		this.bears = result;
+		if (result.data) {
+			fireEvent(this.pageRef, 'bearListUpdate', result.data);
+		}
+	}
+
 	connectedCallback() {
 		loadStyle(this, ursusResources + '/style.css');
 	}
