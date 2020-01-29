@@ -1,0 +1,27 @@
+<template>
+	<lightning-card title="Members" icon-name="custom:custom14">
+		<div class="slds-card__body_inner">
+			<template if:true={members.data}>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<lightning-combobox name="myteamXXX" label="Team: " class="slds-m-bottom_xx-small" value={value}
+						placeholder={choosenValue} options={teamOptions} onchange={handleTeamChange}>
+					</lightning-combobox>
+					<table>
+						<template for:each={members.data} for:item="member">
+							<lightning-layout-item key={member.Id} size="3" class="slds-p-around_x-small">
+								<ul class="slds-m-bottom_xx-small">Name: {member.Name}</ul>
+								<ul class="slds-m-bottom_xx-small">Skills: {member.Team__r.Name}</ul>
+								<ul class="slds-m-bottom_xx-small">Skills: {member.Skills__c}</ul>
+							</lightning-layout-item>
+						</template>
+					</table>
+				</lightning-layout>
+			</template>
+			<template if:true={members.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the Team member list!!!!!
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
