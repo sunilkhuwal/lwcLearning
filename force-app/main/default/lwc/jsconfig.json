@@ -32,6 +32,9 @@
             ],
             "c/teamsApp": [
                 "teamsApp/teamsApp.js"
+            ],
+            "c/showPicklist": [
+                "showPicklist/showPicklist.js"
             ]
         }
     },
