@@ -1,8 +1,28 @@
+<!--
+  @description       : 
+  @author            : Sunil Kumar
+  @group             : 
+  @last modified on  : 10-27-2021
+  @last modified by  : Sunil Kumar
+-->
 <template>
-	<lightning-card title={capitalizedGreeting} icon-name="custom:custom14">
-		<div class="slds-m-around_medium">
-			<p>Today is {currentDate}</p>
-			<lightning-input label="Name" value={greeting} onchange={handleGreetingChange}></lightning-input>
-		</div>
-	</lightning-card>
+  <lightning-card title={capitalizedGreeting} icon-name="custom:custom14">
+    <div class="slds-m-around_medium">
+      <p>Today is {currentDate}</p>
+      <lightning-input
+        label="Name"
+        value={greeting}
+        onchange={handleGreetingChange}
+      ></lightning-input>
+    </div>
+  </lightning-card>
+  <lightning-card>
+    <lightning-record-form
+      object-api-name="Account"
+      record-id={strRecordId}
+      columns="2"
+      mode="edit"
+      fields={arrayFields}
+    ></lightning-record-form>
+  </lightning-card>
 </template>
